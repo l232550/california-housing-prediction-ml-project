@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import joblib
 
 # Load the trained model
-model = pickle.load(open("best_forest_model.pkl", "rb"))
+model = joblib.load("best_forest_model.pkl")
 
 st.title("California Housing Price Prediction")
 st.write("Input the features to predict median house value.")

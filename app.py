@@ -1,7 +1,21 @@
+#import streamlit as st
+#import pandas as pd
+#import numpy as np
+#import dill
+
 import streamlit as st
+import sklearn
+import joblib
 import pandas as pd
 import numpy as np
-import dill
+import sys
+
+st.write("Python version:", sys.version)
+st.write("scikit-learn version:", sklearn.__version__)
+st.write("joblib version:", joblib.__version__)
+st.write("pandas version:", pd.__version__)
+st.write("numpy version:", np.__version__)
+
 
 # ✅ Load model with dill instead of joblib
 with open("full_model_pipeline_dill.pkl", "rb") as f:

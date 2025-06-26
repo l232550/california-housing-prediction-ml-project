@@ -11,7 +11,7 @@ st.write(f"pandas version: {pd.__version__}")
 st.write(f"numpy version: {np.__version__}")
 
 # ✅ Load the compressed model pipeline
-model = joblib.load("model_compressed.joblib")
+model = joblib.load("model.joblib")
 
 st.title("California Housing Price Prediction")
 st.write("Input the features to predict median house value.")

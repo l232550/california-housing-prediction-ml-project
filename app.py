@@ -4,11 +4,12 @@ import numpy as np
 import joblib
 import sklearn
 
-st.write(f"Python version: {'.'.join(map(str, list(np.version_info)[:3]))}")
-st.write(f"scikit-learn version: {sklearn.__version__}")
-st.write(f"joblib version: {joblib.__version__}")
-st.write(f"pandas version: {pd.__version__}")
-st.write(f"numpy version: {np.__version__}")
+
+st.write(f"✅ scikit-learn version: {sklearn.__version__}")
+st.write(f"✅ joblib version: {joblib.__version__}")
+st.write(f"✅ numpy version: {np.__version__}")
+st.write(f"✅ pandas version: {pd.__version__}")
+
 
 # ✅ Load the compressed model pipeline
 model = joblib.load("model.joblib")

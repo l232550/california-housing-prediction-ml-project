@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
+import dill
 
-# ✅ Import the transformer from the module (this makes unpickling work)
-from custom_transformers import CombinedAttributesAdder
-
-# ✅ Load the full pipeline (preprocessing + model)
-model = joblib.load("full_model_pipeline.pkl")
+# ✅ Load model with dill instead of joblib
+with open("full_model_pipeline_dill.pkl", "rb") as f:
+    model = dill.load(f)
 
 st.title("California Housing Price Prediction")
 st.write("Input the features to predict median house value.")
@@ -23,7 +21,7 @@ households = st.slider("Households", 1, 6082, 400)
 median_income = st.slider("Median Income", 0, 15, 3)
 ocean_proximity = st.selectbox("Ocean Proximity", ['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'])
 
-# Build input as DataFrame
+# Input as DataFrame
 input_df = pd.DataFrame([{
     "longitude": longitude,
     "latitude": latitude,
@@ -36,6 +34,6 @@ input_df = pd.DataFrame([{
     "ocean_proximity": ocean_proximity
 }])
 
-# Make prediction
+# Predict
 prediction = model.predict(input_df)
 st.subheader(f"🏡 Predicted Median House Value: ${prediction[0]:,.2f}")

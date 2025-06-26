@@ -1,25 +1,17 @@
-#import streamlit as st
-#import pandas as pd
-#import numpy as np
-#import dill
-
 import streamlit as st
-import sklearn
-import joblib
 import pandas as pd
 import numpy as np
-import sys
+import joblib
+import sklearn
 
-st.write("Python version:", sys.version)
-st.write("scikit-learn version:", sklearn.__version__)
-st.write("joblib version:", joblib.__version__)
-st.write("pandas version:", pd.__version__)
-st.write("numpy version:", np.__version__)
+st.write(f"Python version: {'.'.join(map(str, list(np.version_info)[:3]))}")
+st.write(f"scikit-learn version: {sklearn.__version__}")
+st.write(f"joblib version: {joblib.__version__}")
+st.write(f"pandas version: {pd.__version__}")
+st.write(f"numpy version: {np.__version__}")
 
-
-# ✅ Load model with dill instead of joblib
-with open("full_model_pipeline_dill.pkl", "rb") as f:
-    model = dill.load(f)
+# ✅ Load the compressed model pipeline
+model = joblib.load("model_compressed.joblib")
 
 st.title("California Housing Price Prediction")
 st.write("Input the features to predict median house value.")
@@ -35,7 +27,7 @@ households = st.slider("Households", 1, 6082, 400)
 median_income = st.slider("Median Income", 0, 15, 3)
 ocean_proximity = st.selectbox("Ocean Proximity", ['<1H OCEAN', 'INLAND', 'ISLAND', 'NEAR BAY', 'NEAR OCEAN'])
 
-# Input as DataFrame
+# Build input DataFrame
 input_df = pd.DataFrame([{
     "longitude": longitude,
     "latitude": latitude,
